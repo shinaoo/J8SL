@@ -3,4 +3,13 @@
     所以线程池首先是接收线程对象
     然后具有一定量线程对象,目前做法都是有一个核心数量,最大数量,也就是控制cpu使用数量,不让超载使用cpu
 
+    ThreadPool具有实现一些线程池的接口方法
+    ThreadQueue是保存线程对象的队列
+    ThreadFactory是生成线程的工厂类
+    DenyPolicy是拒绝策略，当线程池的数量达到最大时就拒绝新线程加入
+
+    DefaultDenyPolicy是拒绝之后直接在当前线程执行
+    DefaultThreadFactory就返回一个线程对象
+
+
 
