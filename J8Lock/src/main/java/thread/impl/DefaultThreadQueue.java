@@ -21,14 +21,32 @@ public class DefaultThreadQueue implements ThreadQueue {
     }
 
     public void offer(Runnable runnable) {
-
+        synchronized (threads) {
+            if (threads.size() >= limit) {
+                denyPolicy.reject(runnable, threadPool);
+            } else {
+                threads.addLast(runnable);
+                threads.notifyAll();
+            }
+        }
     }
 
-    public Runnable take() {
-        return null;
+    public Runnable take() throws InterruptedException {
+        synchronized (threads) {
+            while (threads.isEmpty()) {
+                try {
+                    threads.wait();
+                }catch (InterruptedException e){
+                    throw e;
+                }
+            }
+            return threads.removeFirst();
+        }
     }
 
     public int size() {
-        return 0;
+        synchronized (threads){
+            return threads.size();
+        }
     }
 }
