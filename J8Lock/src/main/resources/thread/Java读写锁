@@ -3,3 +3,4 @@
 当调用了lock之后必须要有unlock相对应才能释放
 
 lock包下的SingleLock暂时实现一个简单的锁机制,只有单独的lock和unlock
+无论什么操作,都只能进入lock之后才能操作,unlock释放,是单独的,排他,独享的一种实现
