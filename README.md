@@ -1,2 +1,2 @@
 # J8SL
-Java 8 synchronized lock
+记录对Java一些线程开发以及锁的记录想法
