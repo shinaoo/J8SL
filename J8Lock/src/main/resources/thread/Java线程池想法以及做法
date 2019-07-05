@@ -10,6 +10,25 @@
 
     DefaultDenyPolicy是拒绝之后直接在当前线程执行
     DefaultThreadFactory就返回一个线程对象
+    DefaultThreadQueue是队列的一个具体实现,里面offer和take方法使用了synchronized关键字
+
+    全部思路是.
+    使用ThreadPool的execute提交线程,这个线程全部保存在ThreadPool中的ThreadQueue中,当插入Runnable数量超过ThreadQueue的限制数量时,就执行DenyPolicy.
+    InternalTask就是一个线程,这个线程不停的从ThreadQueue中取出Runnable来执行,所以,ThreadPool中保持一定数量的InteralTask一直循环取出Runnable执行.
+    ThreadTask里面包含了一个Thread和InternalTask对象,ThreadPool中有一个WorkThreadQueue是保存ThreadTask的,就是当前工作线程队列.这个队列保持的数量不会超过coreSize.
+    ThreadPool本身也是一个线程,作用是控制initSize以及coreSize个数量线程的运行
+
+    实际运行过程:
+    一个DefaultThreadQueue保存所有要执行的线程,一个WorkQueue保存当前工作的线程.
+    ThreadPool里面检测当前线程运行的数量,创建时就新建了initSize个线程在执行,里面就是不断循环的取出DefaultThreadQueue的Runnable,调用run方法执行而已.
+    当DefaultThreadQueue里面线程数量还有多余的时候,而且只有initSize个线程在执行,扩大到coreSize个InternalTask来执行,然后DefaultThreadQueue还有剩余时,继续扩大到maxSize;
+    当DefaultThreadQueue中线程数量为0了,然后需要将当前所有的工作线程减少到coreSize个数量.
+
+    缺点:
+    不合理的地方在于ThreadPool里面采用的是每隔TimeUnit.sleep之后才去检测线程数量,进行增加或者减少,并没有根据线程完成的时候就进行增加或减少.
+    还有一个是removeThread的时候,是在DefaultThreadQueue为空队列的时候才进行,也是上面不合理的地方.如果能够按照哪个线程完成,就移除那个线程就好的流程来改进是ok的
+
+
 
 
 
