@@ -1,0 +1,5 @@
+
+锁首先是Lock一个接口,里面有lock和unlock两个方法
+当调用了lock之后必须要有unlock相对应才能释放
+
+lock包下的SingleLock暂时实现一个简单的锁机制,只有单独的lock和unlock
