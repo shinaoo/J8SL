@@ -9,7 +9,7 @@ public class SingleLock implements Lock {
     @Override
     public void lock() throws InterruptedException {
         synchronized (mutex){
-            while(!lock){
+            while(lock){
                 mutex.wait();
             }
             lock = true;
