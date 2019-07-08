@@ -30,7 +30,18 @@ public class ShareObject {
 
     }
 
-
+    public void write(char c){
+        try {
+            singleLock.lock();
+            for (int i = 0;i < length;i ++){
+                chars.add(i,c);
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }finally {
+            singleLock.unlock();
+        }
+    }
 
 
 }
