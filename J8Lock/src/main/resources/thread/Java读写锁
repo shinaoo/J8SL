@@ -2,5 +2,12 @@
 锁首先是Lock一个接口,里面有lock和unlock两个方法
 当调用了lock之后必须要有unlock相对应才能释放
 
-lock包下的SingleLock暂时实现一个简单的锁机制,只有单独的lock和unlock
+lock包下的singlelock包中的SingleLock暂时实现一个简单的锁机制,只有单独的lock和unlock
 无论什么操作,都只能进入lock之后才能操作,unlock释放,是单独的,排他,独享的一种实现
+
+实现一种读写分离的锁,在lock包下的readwritelock包中
+先有一个总的获取读写锁的类,就是ReadWriteLockImpl.里面包含获取读锁或者写锁.
+读锁ReadLock里面,如果有线程正在写,或者有线程等待写的时候(需要加上偏好设置是不是写)的时候,就读锁就进入等待
+写锁WriteLock里面,如果有线程正在读取,或者已经有线程正在写了,就进入等待
+读写是穿插进行的.那么有可能是读取的时候有两个线程写入的值,例如现在写入了1,然后读取过程中有线程写入2,也会读取出2.
+
