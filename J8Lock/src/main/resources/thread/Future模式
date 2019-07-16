@@ -1,0 +1,14 @@
+在JDK1.5中有了Future接口，在JDK1.8中引入了CompletableFuture。
+这里解释并记录Future设计模式的应用
+
+Future接口主要是定义你提交的任务或者线程的返回值以及是否完成
+FutureTask是Future的主要实现，在FutureTask中主要是锁LOCK完成之前，get方法里面一直进入的阻塞状态，知道Future调用了finish方法设置了isDone之后唤醒
+
+FutureService主要是管理你提交的任务
+FutureServiceImpl是FutureService的主要实现，提交之后都是创建一个FutureTask以及新起一个线程完成你提交的任务。
+                然后，Runnable主要是没有任务返回值。而Task类型是有输入和输出值的
+
+Task是有输入值的一个任务。
+
+这个就是一个简单的Future模式的实现。
+这样的话目前都是等待future的get方法有其值返回时才会继续之前的流程。可以使用线程管理将提交的任务管理起来
