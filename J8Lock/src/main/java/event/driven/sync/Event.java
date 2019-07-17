@@ -1,5 +1,7 @@
 package event.driven.sync;
 
+import event.driven.Message;
+
 public class Event implements Message {
 
     @Override

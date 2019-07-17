@@ -1,11 +1,15 @@
 package event.driven.sync;
 
+import event.driven.Channel;
+import event.driven.DynamicRouter;
+import event.driven.Message;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class EventDispatcher implements DynamicRouter<Message>{
+public class EventDispatcher implements DynamicRouter<Message> {
 
-    private final Map<Class<? extends Message>,Channel> routerTable;
+    private final Map<Class<? extends Message>, Channel> routerTable;
 
     public EventDispatcher() {
         this.routerTable = new HashMap<>();

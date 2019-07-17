@@ -1,5 +1,7 @@
 package event.driven.sync;
 
+import event.driven.Channel;
+
 public class EventDispatcherExample {
 
     //InputEvent中定义了X和Y，主要用于的其它Channel中运算
@@ -32,7 +34,7 @@ public class EventDispatcherExample {
         }
     }
 
-    static class ResultEventHandler implements Channel<ResultEvent>{
+    static class ResultEventHandler implements Channel<ResultEvent> {
 
         @Override
         public void dispatch(ResultEvent message) {

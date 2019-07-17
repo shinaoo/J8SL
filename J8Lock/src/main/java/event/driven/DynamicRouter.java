@@ -1,4 +1,4 @@
-package event.driven.sync;
+package event.driven;
 
 public interface DynamicRouter<E extends Message> {
     //针对每一个Message类型注册相关的Channel,只有找到合适的Channel，该Message才会被处理
