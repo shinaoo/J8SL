@@ -5,7 +5,7 @@ import event.driven.Channel;
 public class EventDispatcherExample {
 
     //InputEvent中定义了X和Y，主要用于的其它Channel中运算
-    static class InputEvent extends Event{
+    public static class InputEvent extends Event{
         private final int x;
         private final int y;
         public InputEvent(int x,int y){
@@ -23,7 +23,7 @@ public class EventDispatcherExample {
     }
 
     //存放结果的Event
-    static class ResultEvent extends Event{
+    public static class ResultEvent extends Event{
         private final int result;
         public ResultEvent(int result){
             this.result = result;

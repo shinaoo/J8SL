@@ -18,4 +18,11 @@ DynamicRouter是事件Dispatch的接口,具体实现类是EventDispathcer,里面
 这就是一个简单的事件驱动设计,但是是一个同步的.
 在EventDispatcher下的map不是线程安全的,而且不能并发处理Message消息.只能一个一个消费.出现积压.所以需要改进设计一个异步EDA框架设计
 
+在async包下是一个简单的异步事件驱动设计模式的实现
+首先是AsyncChannel的出现,是对Channel的一个中间层实现,首先是dispatch方法中利用线程池去消费Message,而不是像同步设计中的直接调用处理方法.
+AsyncChannel中的处理方法是一个抽象Abstract方法,放到子类中实现.其两个实现的子类在AsyncEventDispatchExample中的两个Handler类
+
+AsyncEventDispatcher的实现与同步包下的EventDispatcher没有多大区别.
+
+其实异步跟同步的区别主要在于Channel的实现.
 
