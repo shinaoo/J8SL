@@ -1,4 +1,4 @@
-package server;
+package server.sync;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

@@ -1,4 +1,4 @@
-package server;
+package server.sync;
 
 public class TimeServer {
 
