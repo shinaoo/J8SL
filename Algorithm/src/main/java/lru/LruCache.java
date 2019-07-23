@@ -22,6 +22,7 @@ public class LruCache {
     }
 
     public void addKeyValue(String key,String value){
+        System.out.println("key:" + key + " mem:" + cacheMemory + " use:" + useMemory);
         if (cache.containsKey(key)){
             useMemory -= cache.get(key).getBytes().length;
             queue.remove(key);
