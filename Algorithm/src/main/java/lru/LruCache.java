@@ -14,7 +14,7 @@ public class LruCache {
     }
 
     private void init(){
-        cacheMemory = Runtime.getRuntime().freeMemory() >> 2;
+        cacheMemory = Runtime.getRuntime().freeMemory() >> 3;
     }
 
     public String  get(String key){
