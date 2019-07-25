@@ -1,4 +1,12 @@
 
 lru下的LruCache是简单的一个实现.并非线程安全.而且容量是根据当前运行的maxMemory的四分之一的容量来进行限制.
 
+<<<<<<< HEAD
 我在测试的时候,使用Runtime.maxMemory的时候的四分之一的容量在790万时报了OutOfMemory..使用freeMemory的四分之一就不会超过.1000万在860万的时候就报OutOfMemoryError:GC overhead limit exceeded
+=======
+我在测试的时候,使用Runtime.maxMemory的时候的四分之一的容量在790万时报了OutOfMemory..使用freeMemory的四分之一.1000万在860万的时候就报OutOfMemoryError:GC overhead limit exceeded
+                                                                                使用freeMemory的八分之一的.1000万在839万时就崩溃
+
+                                                                                加上Thread.sleep之后.给一个一定休眠的时间.CPU使用率也降低了..内存使用过程也是比较平缓的才到极限值.就是使用过程就比较平缓.
+                                                                                但是就是在内存即将到达操作系统给定的最大值之后,CPU使用率也升上来了.内存也不再增加了
+>>>>>>> 06e4251b02fd00d17f53b178d3955f1a52c513ca

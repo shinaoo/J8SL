@@ -1,5 +1,6 @@
 package lru;
 
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -17,6 +18,13 @@ public class LruMain {
 //        }
         LongStream.range(0,10000000).forEach(count ->{
             lruCache.addKeyValue(count+"","position:" + count);
+            if (count % 50000 == 0){
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 //        lruCache.printAllKeyValue();
     }
