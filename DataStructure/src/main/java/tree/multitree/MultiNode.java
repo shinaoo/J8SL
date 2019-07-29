@@ -1,8 +1,9 @@
 package tree.multitree;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MultiNode {
     public int value;
-    public ArrayList<MultiNode> children;
+    public List<MultiNode> children = new LinkedList<>();
 }
