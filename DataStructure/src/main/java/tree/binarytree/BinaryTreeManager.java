@@ -1,5 +1,9 @@
 package tree.binarytree;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
 public class BinaryTreeManager {
 
     private BinaryNode root;
@@ -64,6 +68,31 @@ public class BinaryTreeManager {
             printBinaryTree(root.left, level + 1);
         if (root.right != null)
             printBinaryTree(root.right, level + 1);
+    }
+
+    public void printTreeNodesByLevel(){
+        //以List方式获取结点再打印
+        List<List<BinaryNode>> nodes = new LinkedList<>();
+
+        getNodeByLevel(root,0,nodes);
+        nodes.forEach(list ->{
+            list.forEach(node ->{
+                System.out.printf("%d---",node.value);
+            });
+            System.out.println("");
+        });
+    }
+
+    private void getNodeByLevel(BinaryNode root,int level,List<List<BinaryNode>> nodes){
+        if (nodes.size() <= level){
+            List<BinaryNode> tmp = new LinkedList<>();
+            nodes.add(tmp);
+        }
+        nodes.get(level).add(root);
+        if (root.left != null)
+            getNodeByLevel(root.left,level+1,nodes);
+        if (root.right != null)
+            getNodeByLevel(root.right,level+1,nodes);
     }
 
 
