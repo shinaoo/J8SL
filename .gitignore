@@ -1,2 +1,7 @@
 .idea/
 *.iml
+
+Algorithm/target/
+DataStructure/target/
+J8Lock/target/
+Nio/target/
