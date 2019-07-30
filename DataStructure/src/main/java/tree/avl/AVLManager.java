@@ -29,4 +29,24 @@ public class AVLManager {
         }
         return node;
     }
+
+    //左旋
+    private Node leftRotation(Node node){
+        Node self = node;
+        Node tmp = node.right.left;
+        node = node.right;
+        node.left = self;
+        self.right = tmp;
+        return node;
+    }
+
+    //右旋
+    private Node rightRotation(Node node){
+        Node self = node;
+        Node tmp = node.left.right;
+        node = node.left;
+        node.right = self;
+        self.left = tmp;
+        return node;
+    }
 }
