@@ -1,5 +1,5 @@
 # J8SL
-记录对Java一些线程开发以及锁的记录想法
+记录对Java开发一些东西的想法
 
 2019-7-5
 线程池原理的简单实现
@@ -27,3 +27,9 @@ Algorithm中增加LRU算法的一个实现.非线程安全
 
 2019-7-25
 DataStructure中queue添加一个循环队列实现
+
+2019-7-29
+DataStructure中tree包下增加一个BinaryTree二叉树的实现
+
+2019-7-30
+DataStructure中tree包下增加一个MultiTree多叉树的一个实现
