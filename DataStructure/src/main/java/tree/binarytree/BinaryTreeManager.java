@@ -57,6 +57,15 @@ public class BinaryTreeManager {
         }
     }
 
+
+    public boolean deleteNodeByValue(int value){
+        return deleteNodeByValueInternal(root,value);
+    }
+
+    public boolean deleteNodeByValueInternal(BinaryNode root,int value){
+        return false;
+    }
+
     public void printTreeByLevel() {
         printBinaryTree(root, 0);
     }
