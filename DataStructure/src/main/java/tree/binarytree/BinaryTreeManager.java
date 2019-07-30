@@ -59,12 +59,42 @@ public class BinaryTreeManager {
 
 
     public boolean deleteNodeByValue(int value){
-        return deleteNodeByValueInternal(root,value);
+        return deleteNodeByValueInternal(root,value) != null ;
     }
 
-    public boolean deleteNodeByValueInternal(BinaryNode root,int value){
-        return false;
+    private BinaryNode deleteNodeByValueInternal(BinaryNode root,int value){
+        if (root == null){
+            return root;
+        }
+        if (root.value > value){
+            root.left = deleteNodeByValueInternal(root.left,value);
+        }else if (root.value < value){
+            root.right = deleteNodeByValueInternal(root.right,value);
+        }else{
+            if (root.left != null && root.right != null){
+                BinaryNode tmp = null;
+                tmp = findMin(root.right);
+                root.value = tmp.value;
+                root.right = deleteNodeByValueInternal(root.right,root.value);
+            }else{
+//                tmp = root;
+                if (root.left == null){
+                    root = root.right;
+                }else if (root.right == null){
+                    root = root.left;
+                }
+            }
+        }
+        return root;
     }
+
+    private BinaryNode findMin(BinaryNode root){
+        while(root.left != null){
+            root = root.left;
+        }
+        return root;
+    }
+
 
     public void printTreeByLevel() {
         printBinaryTree(root, 0);
