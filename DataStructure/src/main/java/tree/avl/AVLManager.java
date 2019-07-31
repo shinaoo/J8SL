@@ -46,6 +46,16 @@ public class AVLManager {
         return tmp;
     }
 
+    private Node leftRightRotation(Node node){
+        node = leftRotation(node);
+        return rightRotation(node);
+    }
+
+    private Node rightLeftRotation(Node node){
+        node = rightRotation(node);
+        return leftRotation(node);
+    }
+
     //查找节点高度
     private int findHeight(Node node) {
         if (node == null)
