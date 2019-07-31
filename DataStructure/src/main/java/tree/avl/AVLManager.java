@@ -8,45 +8,52 @@ public class AVLManager {
         this.root = root;
     }
 
-    public boolean addValue(int value){
+    public boolean addValue(int value) {
         return false;
     }
 
-    public boolean deleteValue(int value){
+    public boolean deleteValue(int value) {
         return false;
     }
 
-    private Node findMax(Node node){
-        while(node.right != null){
+    private Node findMax(Node node) {
+        while (node.right != null) {
             node = node.right;
         }
         return node;
     }
 
-    private Node findMin(Node node){
-        while (node.left != null){
+    private Node findMin(Node node) {
+        while (node.left != null) {
             node = node.left;
         }
         return node;
     }
 
     //左旋
-    private Node leftRotation(Node node){
-        Node self = node;
-        Node tmp = node.right.left;
-        node = node.right;
-        node.left = self;
-        self.right = tmp;
-        return node;
+    private Node leftRotation(Node node) {
+        Node tmp = node.right;
+        node.right = tmp.left;
+        tmp.left = node;
+        return tmp;
     }
 
     //右旋
-    private Node rightRotation(Node node){
-        Node self = node;
-        Node tmp = node.left.right;
-        node = node.left;
-        node.right = self;
-        self.left = tmp;
-        return node;
+    private Node rightRotation(Node node) {
+        Node tmp = node.left;
+        node.left = tmp.right;
+        tmp.right = node;
+        return tmp;
     }
+
+    //查找节点高度
+    private int findHeight(Node node) {
+        if (node == null)
+            return 0;
+        int leftHeight = findHeight(node.left);
+        int rightHeight = findHeight(node.right);
+        return Math.max(leftHeight,rightHeight) + 1;
+    }
+
+
 }
