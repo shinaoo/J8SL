@@ -9,25 +9,53 @@ public class AVLManager {
     }
 
     public boolean addValue(int value) {
-        return false;
+        Node node = new Node(value);
+        return addNode(node);
     }
+
+    public boolean addNode(Node node) {
+        return (root = addNodeInternal(root,node)) != null;
+    }
+
+
+    private Node addNodeInternal(Node root,Node node){
+        if (root == null){
+            root = node;
+            return root;
+        }
+        if (root.value < node.value)
+            root.left = addNodeInternal(root.left,node);
+        else if (root.value > node.value)
+            root.right = addNodeInternal(root.right,node);
+        else
+            return root;
+
+        root.height = 1 + Math.max(height(root.left),height(root.right));
+
+        int balance = getBalanceFactor(root);
+        if (balance > 1 && node.value < root.left.value)
+            return rightRotation(root);
+
+        if (balance < -1 && node.value > root.right.value)
+            return leftRotation(root);
+
+        if (balance > 1 && node.value > root.left.value){
+            root.left = leftRotation(root.left);
+            return rightRotation(root);
+        }
+
+        if (balance < -1 && node.value < root.right.value){
+            root.right = rightRotation(root.right);
+            return leftRotation(root);
+        }
+
+        return root;
+    }
+
+
 
     public boolean deleteValue(int value) {
         return false;
-    }
-
-    private Node findMax(Node node) {
-        while (node.right != null) {
-            node = node.right;
-        }
-        return node;
-    }
-
-    private Node findMin(Node node) {
-        while (node.left != null) {
-            node = node.left;
-        }
-        return node;
     }
 
     //左旋
@@ -35,6 +63,8 @@ public class AVLManager {
         Node tmp = node.right;
         node.right = tmp.left;
         tmp.left = node;
+        tmp.height = Math.max(height(tmp.left),height(tmp.right)) + 1;
+        node.height = Math.max(height(node.left),height(node.right)) + 1;
         return tmp;
     }
 
@@ -43,17 +73,9 @@ public class AVLManager {
         Node tmp = node.left;
         node.left = tmp.right;
         tmp.right = node;
+        tmp.height = Math.max(height(tmp.left),height(tmp.right)) + 1;
+        node.height = Math.max(height(node.left),height(node.right)) + 1;
         return tmp;
-    }
-
-    private Node leftRightRotation(Node node){
-        node = leftRotation(node);
-        return rightRotation(node);
-    }
-
-    private Node rightLeftRotation(Node node){
-        node = rightRotation(node);
-        return leftRotation(node);
     }
 
     //查找节点高度
@@ -62,8 +84,19 @@ public class AVLManager {
             return 0;
         int leftHeight = findHeight(node.left);
         int rightHeight = findHeight(node.right);
-        return Math.max(leftHeight,rightHeight) + 1;
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
+    private int height(Node node){
+        if (node == null)
+            return 0;
+        return node.height;
+    }
+
+    private int getBalanceFactor(Node node){
+        if (node == null)
+            return 0;
+        return height(node.left) - height(node.right);
+    }
 
 }
